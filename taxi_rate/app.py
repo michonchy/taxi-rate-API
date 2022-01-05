@@ -56,7 +56,6 @@ def lambda_handler(event, context):
     try:
         n = event.get('queryStringParameters').get('numbers')
         n = number(n)
-        n = is_taxi_rate(n)
         print(n)
     except:
         return{
