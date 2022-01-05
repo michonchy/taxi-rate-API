@@ -22,7 +22,6 @@ def is_taxi_rate(x):
     r  = x-1700
     a = r//313
     t =r%313
-
     if 0 == t:
         return 610+(80*a)
     else:
@@ -80,7 +79,7 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "hello world",
+            "message": is_taxi_rate(n),
             # "location": ip.text.replace("\n", "")
         }),
     }
