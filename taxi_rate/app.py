@@ -27,6 +27,9 @@ def is_taxi_rate(x):
     else:
         return 610+80+(80*a)
 
+def validate_number(x):
+    if x < 0:
+        raise InvalidError("正の整数で入力してください。")
 
 
 
@@ -56,16 +59,17 @@ def lambda_handler(event, context):
     try:
         n = event.get('queryStringParameters').get('numbers')
         n = number(n)
+        validate_number(n)
         print(n)
-    except:
+    except Exception as e:
         return{
         "statusCode": 400,
         "headers":{
-            "Content-Type": "application/json"
+            "Content-type": "application/json;charset=UTF-8"
         },
         "body":json.dumps({
-            "message":"整数値を入力してください。"
-        }),
+            "message":str(e)
+        },ensure_ascii=False).encode("utf8"),
     }
     # try:
     #     ip = requests.get("http://checkip.amazonaws.com/")
